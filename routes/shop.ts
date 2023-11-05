@@ -4,7 +4,7 @@ const shopRouter = Router();
 
 // Home Page
 shopRouter.get("/", (req, res, next) => {
-  res.send("<h1>Shop Index</h1>");
+  res.render("index");
 });
 
 export default shopRouter;
