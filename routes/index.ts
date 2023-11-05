@@ -7,7 +7,7 @@ routes.use("/", shopRouter);
 
 // for handling 404 routes
 routes.use((req, res, next) => {
-  res.send("404 not found page");
+  res.render("pages/404");
 });
 
 export default routes;
