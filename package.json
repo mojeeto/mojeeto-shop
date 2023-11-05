@@ -4,7 +4,8 @@
   "description": "Create shop based on ExpressJs, EJS, MongoDB and maybe more.",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon app.ts"
+    "dev": "npm run tailwind:css ; nodemon app.ts",
+    "tailwind:css": "postcss public/css/tailwind.css -o public/css/style.css"
   },
   "author": "",
   "license": "ISC",
@@ -14,7 +15,11 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.20",
+    "autoprefixer": "^10.4.16",
     "nodemon": "^3.0.1",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.1.0",
+    "tailwindcss": "^3.3.5",
     "ts-node": "^10.9.1"
   }
 }
