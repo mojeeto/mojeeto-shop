@@ -130,4 +130,4 @@ dist
 .pnp.*
 
 # ignore complied css file from tailwind
-./public/css/style.css
+public/css/style.css
