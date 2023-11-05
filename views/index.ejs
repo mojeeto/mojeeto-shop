@@ -11,6 +11,15 @@
   </head>
   <body>
     <%- include("./includes/nav.ejs")%>
+    <main class="max-w-screen-xl mx-auto">
+      <h1 class="text-3xl font-bold px-5 pt-5">Last Products</h1>
+      <div id="products" class="flex flex-wrap p-5 gap-5">
+        <%- include("./components/product-card.ejs") %> <%-
+        include("./components/product-card.ejs") %> <%-
+        include("./components/product-card.ejs") %> <%-
+        include("./components/product-card.ejs") %>
+      </div>
+    </main>
 
     <script src="js/flowbite.min.js"></script>
   </body>
