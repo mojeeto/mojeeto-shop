@@ -1,11 +1,11 @@
 import { Middleware } from "./middleware";
 
-export const IsAuthenticate: Middleware = (req, res, next) => {
-  if (!req.session.isAuthenticated) res.redirect(403, "/");
+export const isAuthenticate: Middleware = (req, res, next) => {
+  if (!req.session.isAuthenticated) res.redirect("/");
   next();
 };
 
-export const IsNotAuthenticate: Middleware = (req, res, next) => {
-  if (req.session.isAuthenticated) res.redirect(200, "/");
+export const isNotAuthenticate: Middleware = (req, res, next) => {
+  if (req.session.isAuthenticated) res.redirect("/");
   next();
 };

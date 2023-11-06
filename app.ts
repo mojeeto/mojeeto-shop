@@ -5,6 +5,7 @@ import routes from "./routes";
 import { pathJoin } from "./util/filesystem";
 import mongoose from "mongoose";
 import env from "./util/env";
+import bodyParser from "body-parser";
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(
     store: session_store,
   })
 );
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(routes);
 
