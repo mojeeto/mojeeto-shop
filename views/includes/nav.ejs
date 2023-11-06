@@ -55,7 +55,8 @@
             >Shop</a
           >
         </li>
-        <li>
+<% if (locals.isAuthenticated) { %>
+        <li> 
           <button
             id="dropdownNavbarLink"
             data-dropdown-toggle="dropdownNavbar"
@@ -103,6 +104,7 @@
               </li>
             </ul>
         </li>
+            <% } else { %>
         <li>
           <a
             href="/login"
@@ -120,6 +122,7 @@
             >Sign-up</a
           >
         </li>
+        <% } %>
       </ul>
     </div>
   </div>
