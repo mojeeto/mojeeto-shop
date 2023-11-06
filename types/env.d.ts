@@ -1,4 +1,5 @@
-export interface ProccessEnv {
-  MONGO_URL_CONNECT: string | undefined;
-  MONGO_URL_DB: string | undefined;
+export interface ProcessEnv {
+  MONGO_URL_CONNECT: string;
+  MONGO_URL_DB: string;
+  SESSION_SECRET: string;
 }
