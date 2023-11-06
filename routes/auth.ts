@@ -1,5 +1,10 @@
 import { Router } from "express";
-import { getLogin, getSignup, postSignup } from "../controllers/authController";
+import {
+  getLogin,
+  getSignup,
+  postLogin,
+  postSignup,
+} from "../controllers/authController";
 import { isNotAuthenticate } from "../middleware/authMiddleware";
 import { body } from "express-validator";
 
@@ -25,5 +30,6 @@ authRouter.post(
   ],
   postSignup
 );
+authRouter.post("/login", postLogin);
 
 export default authRouter;

@@ -7,8 +7,18 @@ import { Controller } from "./controller";
 import { validationResult } from "express-validator";
 
 export const getLogin: Controller = (req, res, next) => {
-  const errorValidation = validationResult(req);
-  res.render("pages/auth/login", { path: "/login", errorValidation });
+  res.render("pages/auth/login", { path: "/login" });
+};
+
+export const postLogin: Controller = (req, res, next) => {
+  const { email, password } = req.body;
+  return res.render("pages/auth/login", {
+    path: "/login",
+    values: { ...req.body },
+    errorMessage: "Email or Password not correct!",
+    successMessage: "Welcome!",
+    infoMessage: "User Created!",
+  });
 };
 
 export const getSignup: Controller = (req, res, next) => {
@@ -26,7 +36,7 @@ export const postSignup: Controller = (req, res, next) => {
     const errorFields = getErrorValidationFields(validationErrors.array());
     return res.render("pages/auth/signup", {
       path: "/signup",
-      errorValidation,
+      errors: errorValidation,
       errorFields,
       values: { ...req.body },
     });

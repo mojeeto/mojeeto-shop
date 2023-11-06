@@ -1,6 +1,11 @@
 <%- include("../../includes/head.ejs") %>
 <div class="w-[300px] sm:w-[500px] mx-auto">
-  <form>
+  <%- include("../../components/form-errors.ejs") %>
+  <form
+    action="/login"
+    method="post"
+    enctype="application/x-www-form-urlencoded"
+  >
     <div class="mb-6">
       <label
         for="email"
@@ -12,6 +17,7 @@
         id="email"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
         placeholder="example@localhost.com"
+        value="<%= locals.values?.email %>"
         required
       />
     </div>
