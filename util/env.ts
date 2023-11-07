@@ -7,6 +7,7 @@ const env = cleanEnv(process.env, {
   MONGO_URL_DB: str(),
   SESSION_SECRET: str(),
   SESSION_COLLECTION_NAME: str(),
+  CSRF_SECRET: str(),
 });
 
 export default env;

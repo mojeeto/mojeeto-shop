@@ -1,32 +1,35 @@
 import express from "express";
-import session from "express-session";
-import SessionMongoConnect from "connect-mongo";
 import routes from "./routes";
 import { pathJoin } from "./util/filesystem";
 import mongoose from "mongoose";
 import env from "./util/env";
-import bodyParser from "body-parser";
+import sessionMiddleware from "./middleware/sessionMiddleware";
+import csrfMiddleware from "./middleware/csrfMiddleware";
+import parserMiddleware from "./middleware/parserMiddleware";
 
 const app = express();
 
-const session_store = SessionMongoConnect.create({
-  mongoUrl: env.MONGO_URL_CONNECT + env.MONGO_URL_DB,
-  collectionName: env.SESSION_COLLECTION_NAME,
-});
-
 app.set("view engine", "ejs");
+app.use(parserMiddleware);
 app.use(express.static(pathJoin("public")));
-app.use(
-  session({
-    secret: env.SESSION_SECRET,
-    saveUninitialized: false,
-    resave: false,
-    store: session_store,
-  })
-);
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(sessionMiddleware);
 
+app.use(csrfMiddleware);
 app.use(routes);
+
+app.use(
+  (
+    error: Error,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    if (error.name === "ForbiddenError") {
+      return res.redirect("/403");
+    }
+    console.log("ERROR-Name:", error.name, "\nERROR-Message:", error.message);
+  }
+);
 
 mongoose
   .connect(env.MONGO_URL_CONNECT + env.MONGO_URL_DB)
