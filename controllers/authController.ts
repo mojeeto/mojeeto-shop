@@ -1,4 +1,5 @@
 import User from "../models/User";
+import { flashAddMessage } from "../util/flash";
 import {
   getErrorValidationFieldMsg,
   getErrorValidationFields,
@@ -23,7 +24,10 @@ export const postLogin: Controller = (req, res, next) => {
 
 export const getSignup: Controller = (req, res, next) => {
   const errorValidation = validationResult(req);
-  res.render("pages/auth/signup", { path: "/signup", errorValidation });
+  res.render("pages/auth/signup", {
+    path: "/signup",
+    errorValidation,
+  });
 };
 
 export const postSignup: Controller = (req, res, next) => {
@@ -41,9 +45,9 @@ export const postSignup: Controller = (req, res, next) => {
       values: { ...req.body },
     });
   }
-
-  return res.redirect("/login");
-
+  flashAddMessage(req, "UserNotFound", "User was exists!");
+  res.redirect("/signup");
+  return;
   User.findOne({ email: email })
     .then((user) => {
       if (user) return res.redirect("/signup");
