@@ -1,7 +1,11 @@
 <%- include("../../includes/head.ejs") %>
 <div class="flex flex-col gap-5 mt-5">
+  <%- include("../../components/form-errors.ejs") %>
   <h2 class="text-2xl">Add Product</h2>
-  <form>
+  <form action="/add-product" method="post" enctype="multipart/form-data">
+    <% if (locals.csrfToken) { %>
+    <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>" />
+    <% } %>
     <div class="relative z-0 w-full mb-6 group">
       <label
         for="product_title"
@@ -29,6 +33,7 @@
           id="product_price"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
           placeholder=""
+          value="1.99"
         />
       </div>
       <div class="relative z-0 w-full mb-6 group">
@@ -56,6 +61,7 @@
           id="product_quantity"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
           placeholder=""
+          value="1"
         />
       </div>
     </div>

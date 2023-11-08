@@ -21,7 +21,8 @@
     "express-session": "^1.17.3",
     "express-validator": "^7.0.1",
     "flowbite": "^2.0.0",
-    "mongoose": "^8.0.0"
+    "mongoose": "^8.0.0",
+    "multer": "^1.4.5-lts.1"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
@@ -30,6 +31,7 @@
     "@types/csurf": "^1.11.5",
     "@types/express": "^4.17.20",
     "@types/express-session": "^1.17.9",
+    "@types/multer": "^1.4.10",
     "autoprefixer": "^10.4.16",
     "dotenv": "^16.3.1",
     "nodemon": "^3.0.1",
