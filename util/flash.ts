@@ -2,14 +2,19 @@ import { Request } from "express";
 
 export type FlashMessageTypes = "INFO" | "ERROR" | "SUCCESS";
 
-const flashKeys: { [key: string]: FlashMessageTypes } = {
-  UserNotFound: "ERROR",
+export type FlasKeyType = {
+  [key: string]: FlashMessageTypes;
+};
+const flashKeys: FlasKeyType = {
+  error: "ERROR",
+  success: "SUCCESS",
+  info: "INFO",
 };
 export type FlashKeys = keyof typeof flashKeys;
 
 export type FlashMessage = {
   type: FlashMessageTypes;
-  message: string;
+  messages: string[];
 };
 
 export const flashAddMessage = (
@@ -21,9 +26,15 @@ export const flashAddMessage = (
 };
 
 export const flashGetAllMessages = (req: Request) => {
-  const messages = Object.keys(flashKeys).map((key) => ({
-    type: flashKeys[key],
-    messages: req.flash(key),
-  }));
+  const messages: FlashMessage[] = [];
+  Object.keys(flashKeys).forEach((key) => {
+    const flashMessage = req.flash(key);
+    if (flashMessage.length > 0) {
+      messages.push({
+        type: flashKeys[key],
+        messages: flashMessage,
+      });
+    }
+  });
   return messages;
 };
