@@ -36,17 +36,18 @@ export const postLogin: Controller = (req, res, next) => {
       bcrypt.compare(password, user.password).then((result) => {
         if (result) {
           req.session.isAuthenticated = true;
+          if (user.role === "ADMIN") req.session.isAdmin = true;
           req.session.save((err) => {
             if (err) return next(new Error("Error while set session value."));
-            flashAddMessage(req, "Welcome", "Welcome to ");
+            flashAddMessage(
+              req,
+              "success",
+              `Welcome to Site Mr.${user.lastname}`
+            );
             res.redirect("/");
           });
         } else {
-          flashAddMessage(
-            req,
-            "EmailOrPasswordNotCorrect",
-            "Email or Password not correct!"
-          );
+          flashAddMessage(req, "error", "Email or Password not correct!");
           return res.redirect("/login");
         }
       });
@@ -103,4 +104,11 @@ export const postSignup: Controller = (req, res, next) => {
     .catch((err) =>
       next(new Error("Error while searching user in postSignup"))
     );
+};
+
+export const logout: Controller = (req, res, next) => {
+  req.session.destroy((err) => {
+    if (err) return next(new Error("Error while set session value."));
+    res.redirect("/");
+  });
 };

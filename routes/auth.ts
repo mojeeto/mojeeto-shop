@@ -2,16 +2,21 @@ import { Router } from "express";
 import {
   getLogin,
   getSignup,
+  logout,
   postLogin,
   postSignup,
 } from "../controllers/authController";
-import { isNotAuthenticate } from "../middleware/authMiddleware";
+import {
+  isAuthenticate,
+  isNotAuthenticate,
+} from "../middleware/authMiddleware";
 import { body } from "express-validator";
 
 const authRouter = Router();
 
 authRouter.get("/login", isNotAuthenticate, getLogin);
 authRouter.get("/signup", isNotAuthenticate, getSignup);
+authRouter.get("/logout", isAuthenticate, logout);
 
 authRouter.post(
   "/signup",
