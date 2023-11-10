@@ -37,6 +37,7 @@ export const postLogin: Controller = (req, res, next) => {
         if (result) {
           req.session.isAuthenticated = true;
           if (user.role === "ADMIN") req.session.isAdmin = true;
+          req.session.userId = user.id;
           req.session.save((err) => {
             if (err) return next(new Error("Error while set session value."));
             flashAddMessage(

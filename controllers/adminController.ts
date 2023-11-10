@@ -6,6 +6,8 @@ import {
   getErrorValidationFields,
 } from "../util/validation";
 import Product from "../models/Product";
+import { Types } from "mongoose";
+import { flashAddMessage } from "../util/flash";
 
 export const getManageProducts: Controller = (req, res, next) => {
   res.render("pages/admin/manage-products");
@@ -47,5 +49,20 @@ export const postAddProduct: Controller = (req, res, next) => {
       errorFields: ["image"],
     });
   }
-  res.redirect("/add-product");
+  const product = new Product({
+    title,
+    price,
+    quantity_available: quantity,
+    description,
+    imagePath: image.path,
+    creatorId: new Types.ObjectId(req.session.userId),
+  });
+  product
+    .save()
+    .then((product) => {
+      if (product.isNew)
+        flashAddMessage(req, "success", "Product Successfully added!");
+      res.redirect("/manage-products");
+    })
+    .catch((err) => next(new Error("Error while create new Product!")));
 };

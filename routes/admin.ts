@@ -21,8 +21,6 @@ adminRouter.post(
   isAdmin,
   [
     body("title")
-      .isAlphanumeric()
-      .withMessage("Name must alphanumeric.")
       .isLength({ min: 2, max: 32 })
       .withMessage("Name length between 2 & 32 character."),
     body(
