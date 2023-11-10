@@ -75,3 +75,61 @@ export const postAddProduct: Controller = (req, res, next) => {
     })
     .catch((err) => next(new Error("Error while create new Product!")));
 };
+
+export const getEditProduct: Controller = (req, res, next) => {
+  const { productId } = req.params;
+  Product.findOne({ _id: productId })
+    .then((product) => {
+      if (!product) return res.redirect("/manage-products");
+      res.render("pages/admin/add-update-product", {
+        values: {
+          title: product.title,
+          price: product.price,
+          quantity: product.quantity_available,
+          description: product.description,
+          id: productId,
+        },
+        edit: true,
+      });
+    })
+    .catch((err) =>
+      next(new Error("Error while finding product in getEditProduct"))
+    );
+};
+
+export const postEditProduct: Controller = (req, res, next) => {
+  const { productId } = req.params;
+  const { title, price, quantity, description } = req.body;
+  const image = req.file;
+  Product.findOne({ _id: productId })
+    .then((product) => {
+      if (product) {
+        product.title = title;
+        product.price = price;
+        product.quantity_available = quantity;
+        product.description = description;
+        if (image) {
+          product.imagePath = image.path;
+        }
+        return product.save();
+      } else {
+        flashAddMessage(req, "error", "Product Not Found!");
+        res.redirect("/manage-products");
+      }
+    })
+    .then((updatedProduct) => {
+      flashAddMessage(req, "success", "Product Updated!");
+      res.redirect("/manage-products");
+    })
+    .catch((err) => next(new Error(err)));
+};
+
+export const postDeleteProduct: Controller = (req, res, next) => {
+  const { productId } = req.params;
+  Product.findOneAndDelete({ _id: productId })
+    .then((product) => {
+      flashAddMessage(req, "info", "Product Deleted!");
+      res.redirect("/manage-products");
+    })
+    .catch((err) => next(err));
+};

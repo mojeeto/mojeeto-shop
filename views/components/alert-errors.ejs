@@ -1,5 +1,5 @@
 <% if (locals.alertMessages.length > 0) { %>
-<div class="w-[300px] sm:w-[500px] mx-auto mb-5 flex flex-col gap-5">
+<div class="w-[300px] sm:w-[500px] mx-auto flex flex-col gap-5">
   <% locals.alertMessages.forEach(alertMessage => { if (alertMessage.type ===
   "ERROR") { alertMessage.messages.forEach(message => { %>
   <div
