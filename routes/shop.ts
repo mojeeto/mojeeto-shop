@@ -1,10 +1,9 @@
 import { Router } from "express";
-import { getHome, getShop } from "../controllers/shopController";
+import { getShop } from "../controllers/shopController";
 
 const shopRouter = Router();
 
 // Home Page
-shopRouter.get("/", getHome);
-shopRouter.get("/shop", getShop);
+shopRouter.get("/", getShop);
 
 export default shopRouter;

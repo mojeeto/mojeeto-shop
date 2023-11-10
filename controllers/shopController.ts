@@ -1,9 +1,10 @@
+import Product from "../models/Product";
 import { Controller } from "./controller";
 
-export const getHome: Controller = (req, res, next) => {
-  res.render("index", { path: "/" });
-};
-
 export const getShop: Controller = (req, res, next) => {
-  res.redirect("/");
+  Product.find()
+    .then((products) => {
+      res.render("index", { path: "/", products });
+    })
+    .catch((err) => next(new Error("Error while getHome")));
 };

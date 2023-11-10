@@ -14,6 +14,7 @@ const app = express();
 app.set("view engine", "ejs");
 app.use(parserMiddleware);
 app.use(express.static(pathJoin("public")));
+app.use("/images", express.static(pathJoin("images")));
 app.use(sessionMiddleware);
 app.use(csrfMiddleware);
 app.use(flash());

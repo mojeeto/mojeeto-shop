@@ -25,6 +25,7 @@
         </tr>
       </thead>
       <tbody>
+        <% locals.products?.forEach(product => {%>
         <tr
           class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
         >
@@ -32,10 +33,10 @@
             scope="row"
             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
           >
-            Apple MacBook Pro 17"
+            <%= product.title %>
           </th>
-          <td class="px-6 py-4">Yes</td>
-          <td class="px-6 py-4">$2999</td>
+          <td class="px-6 py-4"><%= product.quantity_available %></td>
+          <td class="px-6 py-4">$<%= product.price %></td>
           <td class="flex items-center px-6 py-4 space-x-3">
             <a
               href="#"
@@ -49,6 +50,7 @@
             >
           </td>
         </tr>
+        <%})%>
       </tbody>
     </table>
   </div>

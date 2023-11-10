@@ -8,12 +8,6 @@ export interface IProduct extends Document {
   description: string;
   quantity_available?: number;
   creatorId: PopulatedDoc<IUser & Document>;
-  rate: [
-    {
-      userId: PopulatedDoc<IUser & Document>;
-      rateNumber: number;
-    }
-  ];
 }
 
 const ProductSchema = new Schema<IProduct>({
@@ -39,19 +33,6 @@ const ProductSchema = new Schema<IProduct>({
     ref: "User",
     required: true,
   },
-  rate: [
-    {
-      userId: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-      },
-      rateNumber: {
-        type: Number,
-        required: true,
-      },
-    },
-  ],
 });
 
 export default model<IProduct>("Product", ProductSchema);

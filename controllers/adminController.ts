@@ -10,7 +10,17 @@ import { Types } from "mongoose";
 import { flashAddMessage } from "../util/flash";
 
 export const getManageProducts: Controller = (req, res, next) => {
-  res.render("pages/admin/manage-products");
+  Product.find({ creatorId: req.session.userId })
+    .then((products) => {
+      console.log(products);
+      res.render("pages/admin/manage-products", {
+        products,
+        path: "/manage-products",
+      });
+    })
+    .catch((err) =>
+      next(new Error("ERROR while fetch products in getManageProducts"))
+    );
 };
 
 export const getManageUsers: Controller = (req, res, next) => {
