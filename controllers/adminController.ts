@@ -27,7 +27,7 @@ export const getManageUsers: Controller = (req, res, next) => {
 };
 
 export const getAddProduct: Controller = (req, res, next) => {
-  res.render("pages/admin/add-product");
+  res.render("pages/admin/add-update-product");
 };
 
 export const postAddProduct: Controller = (req, res, next) => {
@@ -39,7 +39,7 @@ export const postAddProduct: Controller = (req, res, next) => {
       validationErrors.array()
     );
     const errorFields = getErrorValidationFields(validationErrors.array());
-    return res.render("pages/admin/add-product", {
+    return res.render("pages/admin/add-update-product", {
       path: "/manage-products",
       values: { ...req.body },
       errors: errorsValidation,
@@ -51,7 +51,7 @@ export const postAddProduct: Controller = (req, res, next) => {
       { field: "Image", message: "Your image is not correct or is empty." },
       { field: "Image", message: "Your image must jpg or png" },
     ];
-    return res.render("pages/admin/add-product", {
+    return res.render("pages/admin/add-update-product", {
       path: "/manage-products",
       values: { ...req.body },
       errors,
