@@ -1,6 +1,7 @@
 import { validationResult } from "express-validator";
 import { Controller } from "./controller";
 import {
+  GetErrorValidationDataResult,
   getErrorValidationFieldMsg,
   getErrorValidationFields,
 } from "../util/validation";
@@ -26,7 +27,6 @@ export const postAddProduct: Controller = (req, res, next) => {
     const errorsValidation = getErrorValidationFieldMsg(
       validationErrors.array()
     );
-    // TODO:: error fields not working fix that
     const errorFields = getErrorValidationFields(validationErrors.array());
     return res.render("pages/admin/add-product", {
       path: "/manage-products",
@@ -36,10 +36,15 @@ export const postAddProduct: Controller = (req, res, next) => {
     });
   }
   if (!image) {
-    // TODO:: ADD IMAGE
+    const errors: GetErrorValidationDataResult[] = [
+      { field: "Image", message: "Your image is not correct or is empty." },
+      { field: "Image", message: "Your image must jpg or png" },
+    ];
     return res.render("pages/admin/add-product", {
       path: "/manage-products",
       values: { ...req.body },
+      errors,
+      errorFields: ["image"],
     });
   }
   res.redirect("/add-product");

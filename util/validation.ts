@@ -6,7 +6,7 @@ export const isFieldValidationError = (
   return error && error.path && typeof error.path === "string";
 };
 
-type GetErrorValidationDataResult = { field?: string; message?: string };
+export type GetErrorValidationDataResult = { field?: string; message?: string };
 export const getErrorValidationFieldMsg = (
   validationError: ValidationError[]
 ): GetErrorValidationDataResult[] => {
