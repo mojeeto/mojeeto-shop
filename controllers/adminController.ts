@@ -12,7 +12,6 @@ import { flashAddMessage } from "../util/flash";
 export const getManageProducts: Controller = (req, res, next) => {
   Product.find({ creatorId: req.session.userId })
     .then((products) => {
-      console.log(products);
       res.render("pages/admin/manage-products", {
         products,
         path: "/manage-products",
