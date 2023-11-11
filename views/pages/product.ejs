@@ -1,0 +1,28 @@
+<%- include("../includes/head.ejs") %> <% if (locals.product) { %> <%-
+include('../components/alert-errors') %>
+<div class="flex justify-start flex-col sm:flex-row gap-5 my-5">
+  <img
+    class="p-5 w-auto sm:w-[300px] md:w-[400px] lg:w-[500px] border-[1px] rounded-lg border-gay-200"
+    src="<%= product.imagePath %>"
+    alt="<%= product.title %>"
+  />
+  <div class="flex flex-col gap-5 justify-between">
+    <div class="flex flex-col gap-2">
+      <h2 class="text-2xl sm:text-3xl font-bold"><%= product.title %></h2>
+      <p class="font-medium"><%= product.description %></p>
+    </div>
+    <div class="flex justify-between items-center">
+      <span class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white"
+        >$<%= product.price %></span
+      >
+      <a
+        href="#"
+        class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+        >Add to cart</a
+      >
+    </div>
+  </div>
+</div>
+<% } else { %>
+<h2 class="text-2xl">Product not Found!</h2>
+<% } %> <%- include("../includes/end.ejs") %>
