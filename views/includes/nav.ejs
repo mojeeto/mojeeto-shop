@@ -48,6 +48,13 @@
             >Shop</a
           >
         </li>
+        <li>
+          <a
+            href="/cart"
+            class="<%= locals.path === "/cart" ? nav__active_item_class : nav__default_item_class%>"
+            >Cart</a
+          >
+        </li>
 <% if (locals.isAuthenticated) { %>
     <% if (locals.isAdmin) {%>
       <li>

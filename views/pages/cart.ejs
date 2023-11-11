@@ -1,0 +1,41 @@
+<%- include("../includes/head.ejs") %>
+<div class="flex flex-col gap-5 my-5">
+  <% if (locals.cart) { %>
+  <ul class="flex flex-col gap-5">
+    <% locals.cart.products.forEach(({product, count}) => {%>
+    <li>
+      <div class="flex flex-col gap-5 border-gray-400 border-[1px] px-3 py-4">
+        <div class="flex justify-between">
+          <span class="font-medium text-xl"><%= product.title %></span
+          ><span
+            >$<%= product.price %>*<%= count %>: $<%= (product.price *
+            count).toFixed(2)%></span
+          >
+        </div>
+        <div class="flex gap-2">
+          <a
+            href="/cart/<%= product.id %>"
+            class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+            >Add</a
+          ><a
+            href="/cart/remove/<%= product.id %>"
+            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+            >Delete</a
+          >
+        </div>
+      </div>
+    </li>
+    <%})%>
+  </ul>
+  <% } %>
+  <hr />
+  <div class="flex justify-between items-center">
+    <h3 class="text-xl">Total Price: $<%= cart.total_price %></h3>
+    <a
+      href="/order"
+      class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+      >ORDER!</a
+    >
+  </div>
+</div>
+<%- include("../includes/end.ejs") %>

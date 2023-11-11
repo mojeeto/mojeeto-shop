@@ -3,8 +3,7 @@ import { getProduct, getShop } from "../controllers/shopController";
 
 const shopRouter = Router();
 
-// Home Page
-shopRouter.get("/", getShop);
 shopRouter.get("/:productId", getProduct);
+shopRouter.get("/", getShop);
 
 export default shopRouter;

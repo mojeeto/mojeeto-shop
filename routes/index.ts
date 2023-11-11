@@ -2,11 +2,13 @@ import { Router, Request, Response, NextFunction } from "express";
 import shopRouter from "./shop";
 import authRouter from "./auth";
 import adminRouter from "./admin";
+import cartRouter from "./cart";
 
 const routes = Router();
 
 routes.use(adminRouter);
 routes.use(authRouter);
+routes.use("/cart", cartRouter);
 routes.use("/", shopRouter);
 
 routes.use("/403", (req, res, next) => {
